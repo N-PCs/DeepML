@@ -1,0 +1,6 @@
+def transpose_matrix(a: list[list[int|float]]) -> list[list[int|float]]:
+	import numpy as np
+    a=np.array(a)
+    c=np.transpose(a)
+    b=list(c)
+    return b
