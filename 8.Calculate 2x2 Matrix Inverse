@@ -1,0 +1,6 @@
+def inverse_2x2(matrix: list[list[float]]) -> list[list[float]]:
+    import numpy as np
+    matrix=np.array(matrix)
+    inverse=np.linalg.inv(matrix)
+	return inverse
+    
