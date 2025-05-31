@@ -1,0 +1,5 @@
+def calculate_covariance_matrix(vectors: list[list[float]]) -> list[list[float]]:
+	import numpy as np
+    vectors=np.array(vectors)
+    cov_matrix=np.cov(vectors,bias=0)
+	return [cov_matrix]
