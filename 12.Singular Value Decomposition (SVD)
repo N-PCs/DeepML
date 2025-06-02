@@ -1,0 +1,25 @@
+import numpy as np
+def svd_2x2_singular_values(A: np.ndarray) -> tuple:
+    AT_A = np.dot(A.T, A)
+    off_diag = AT_A[0, 1]
+    if np.isclose(off_diag, 0):
+        cos_theta = 1
+        sin_theta = 0
+    else:
+        a = AT_A[0, 0]
+        c = AT_A[1, 1]
+        theta = 0.5 * np.arctan2(2 * off_diag, a - c)
+        cos_theta = np.cos(theta)
+        sin_theta = np.sin(theta)
+    V = np.array([[cos_theta, -sin_theta], [sin_theta, cos_theta]])
+    rotated_AT_A = V.T @ AT_A @ V
+    sigma1 = np.sqrt(rotated_AT_A[0, 0])
+    sigma2 = np.sqrt(rotated_AT_A[1, 1])
+    Sigma = np.array([sigma1, sigma2])
+    if Sigma[0] < Sigma[1]:
+        Sigma = np.array([Sigma[1], Sigma[0]])
+        V = np.fliplr(V)
+    Sigma_inv = np.diag(1 / Sigma)
+    U = A @ V @ Sigma_inv
+    V_T = V.T
+    return U, Sigma, V_T
