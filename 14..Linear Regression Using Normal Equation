@@ -1,0 +1,15 @@
+import numpy as np
+def linear_regression_normal_equation(X: list[list[float]], y: list[float]) -> list[float]:
+    X_np = np.array(X, dtype=np.float64)
+    y_np = np.array(y, dtype=np.float64)
+    X_transpose = X_np.T
+    Xt_X = np.dot(X_transpose, X_np)
+    Xt_X_inv = np.linalg.inv(Xt_X)
+    Xt_y = np.dot(X_transpose, y_np)
+    theta = np.dot(Xt_X_inv, Xt_y)
+
+    theta_rounded = [round(t, 4) for t in theta]
+
+    theta_rounded = [0.0 if abs(t) == 0.0 else t for t in theta_rounded]
+
+	return theta_rounded
