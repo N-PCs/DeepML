@@ -1,0 +1,20 @@
+import math
+
+def single_neuron_model(features: list[list[float]], labels: list[int], weights: list[float], bias: float) -> (list[float], float):
+    probabilities = []
+    for feature_vector in features:
+        z = 0.0
+        for feature, weight in zip(feature_vector, weights):
+            z += feature * weight
+        z += bias
+        probability = 1 / (1 + math.exp(-z))
+        probabilities.append(round(probability, 4))
+    
+    squared_errors = []
+    for prob, label in zip(probabilities, labels):
+        error = prob - label
+        squared_errors.append(error ** 2)
+    mse = sum(squared_errors) / len(squared_errors)
+    mse_rounded = round(mse, 4)
+    
+    return probabilities, mse_rounded
