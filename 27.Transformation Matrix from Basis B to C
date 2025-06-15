@@ -1,0 +1,9 @@
+import numpy as np
+
+def transform_basis(B: list[list[float]], C: list[list[float]]) -> list[list[float]]:
+    B_matrix = np.array(B).T
+    C_matrix = np.array(C).T
+    C_inv = np.linalg.inv(C_matrix)
+    P = np.dot(C_inv, B_matrix)
+    P_rounded = np.round(P, 4)
+    return P_rounded.T.tolist()  # Transpose the result to match the expected output
